@@ -109,8 +109,8 @@ Route::group(['prefix' => 'kategori'], function () {
     Route::delete('/{id}', [KategoriController::class, 'destroy']); // menghapus data kategori
 });
 
-//route CRUD barang
-Route::group(['prefix' => 'barang'], function () {
+//route CRUD film
+Route::group(['prefix' => 'film'], function () {
     Route::get('/', [FilmController::class, 'index']);
     Route::post('/list', [FilmController::class, 'list']);
     Route::get('/create', [FilmController::class, 'create']);
