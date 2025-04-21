@@ -14,7 +14,7 @@ class FilmController extends Controller
     {
         $breadcrumb = (object) [
             'title' => 'Data film',
-            'list'  => ['Home', 'film']
+            'list'  => ['Home', 'Film']
         ];
 
         $page = (object) [
@@ -48,33 +48,15 @@ class FilmController extends Controller
                 //     '<button type="submit" class="btn btn-danger btn-sm"
                 //     onclick="return confirm(\'Apakah Anda yakit menghapus data
                 //     ini?\');">Hapus</button></form>';
+                
                 $btn = '<button onclick="modalAction(\'' . url('/film/' . $film->film_id . '/show_ajax') . '\')" class="btn btn-info btn-sm">Detail</button> ';
-
                 $btn .= '<button onclick="modalAction(\'' . url('/film/' . $film->film_id . '/edit_ajax') . '\')" class="btn btn-warning btn-sm">Edit</button> ';
-
                 $btn .= '<button onclick="modalAction(\'' . url('/film/' . $film->film_id . '/delete_ajax') . '\')" class="btn btn-danger btn-sm">Hapus</button> ';
+                
                 return $btn;
             })
             ->rawColumns(['aksi']) // memberitahu bahwa kolom aksi adalah html
             ->make(true);
-    }
-
-    public function create()
-    {
-        $breadcrumb = (object) [
-            'title' => 'Tambah film',
-            'list'  => ['Home', 'film', 'Tambah']
-        ];
-
-        $page = (object) [
-            'title' => 'Tambah film baru'
-        ];
-
-        $kategori = KategoriModel::all();
-
-        $activeMenu = 'film';
-
-        return view('film.create', ['breadcrumb' => $breadcrumb, 'page' => $page, 'kategori' => $kategori, 'activeMenu' => $activeMenu]);
     }
 
     // Create ajax
@@ -83,25 +65,6 @@ class FilmController extends Controller
         $kategori = KategoriModel::select('kategori_id', 'kategori_nama')->get();
 
         return view('film.create_ajax')->with('kategori', $kategori);
-    }
-
-    public function store(Request $request)
-    {
-        $request->validate([
-            'kategori_id'   => 'required|int',
-            'film_kode'   => 'required|string|min:3|unique:m_film,film_kode',
-            'film_nama'   => 'required|string|max:100',
-            'harga_jual'    => 'required|integer'
-        ]);
-
-        FilmModel::create([
-            'kategori_id'   => $request->kategori_id,
-            'film_kode'   => $request->film_kode,
-            'film_nama'   => $request->film_nama,
-            'harga_jual'    => $request->harga_jual
-        ]);
-
-        return redirect('/film')->with('success', 'Data film berhasil disimpan');
     }
 
     // Store ajax
@@ -140,8 +103,8 @@ class FilmController extends Controller
         $film = FilmModel::with('kategori')->find($id);
 
         $breadcrumb = (object) [
-            'title' => 'Detail film',
-            'list'  => ['Home', 'film', 'Detail']
+            'title' => 'Detail Film',
+            'list'  => ['Home', 'Film', 'Detail']
         ];
 
         $page = (object) [
@@ -153,25 +116,6 @@ class FilmController extends Controller
         return view('film.show', ['breadcrumb' => $breadcrumb, 'page' => $page, 'activeMenu' => $activeMenu, 'film' => $film]);
     }
 
-    public function edit(string $id)
-    {
-        $film = FilmModel::find($id);
-        $kategori = KategoriModel::all();
-
-        $breadcrumb = (object) [
-            'title' => 'Edit film',
-            'list'  => ['Home', 'film', 'Edit']
-        ];
-
-        $page = (object) [
-            'title' => 'Edit film'
-        ];
-
-        $activeMenu = 'film';
-
-        return view('film.edit', ['breadcrumb' => $breadcrumb, 'page' => $page, 'activeMenu' => $activeMenu, 'film' => $film, 'kategori' => $kategori]);
-    }
-
     // Edit ajax
     public function edit_ajax(string $id)
     {
@@ -179,25 +123,6 @@ class FilmController extends Controller
         $kategori = KategoriModel::select('kategori_id', 'kategori_nama')->get();
 
         return view('film.edit_ajax', ['film' => $film, 'kategori' => $kategori]);
-    }
-
-    public function update(Request $request, string $id)
-    {
-        $request->validate([
-            'kategori_id'   => 'required|integer',
-            'film_kode'   => 'required|string|min:3|unique:m_film,film_kode,' . $id . ',film_id',
-            'film_nama'   => 'required|string|max:100',
-            'harga_jual'    => 'required|integer'
-        ]);
-
-        FilmModel::find($id)->update([
-            'kategori_id'   => $request->kategori_id,
-            'film_kode'   => $request->film_kode,
-            'film_nama'   => $request->film_nama,
-            'harga_jual'    => $request->harga_jual
-        ]);
-
-        return redirect('/film')->with('success', 'Data film berhasil diubah');
     }
 
     // Update ajax
@@ -212,7 +137,6 @@ class FilmController extends Controller
             ];
 
             $validator = Validator::make($request->all(), $rules);
-
             if ($validator->fails()) {
                 return response()->json([
                     'status' => false,
@@ -266,22 +190,5 @@ class FilmController extends Controller
             }
         }
         return redirect('/');
-    }
-
-    public function destroy(string $id)
-    {
-        $check = FilmModel::find($id);
-
-        if (!$check) {
-            return redirect('/film')->with('error', 'Data film tidak ditemukan');
-        }
-
-        try {
-            FilmModel::destroy($id);
-
-            return redirect('/film')->with('success', 'Data film berhasil dihapus');
-        } catch (\Illuminate\Database\QueryException $e) {
-            return redirect('/film')->with('error', 'Data film gagal dihapus karena masih terdapat tabel lain yang terkait dengan data ini');
-        }
     }
 }

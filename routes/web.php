@@ -93,17 +93,12 @@ Route::group(['prefix' => 'kategori'], function () {
 Route::group(['prefix' => 'film'], function () {
     Route::get('/', [FilmController::class, 'index']);
     Route::post('/list', [FilmController::class, 'list']);
-    Route::get('/create', [FilmController::class, 'create']);
-    Route::post('/', [FilmController::class, 'store']);
 
     // Create dengan ajax
     Route::get('/create_ajax', [FilmController::class, 'create_ajax']);
     Route::post('/ajax', [FilmController::class, 'store_ajax']);
 
-
     Route::get('/{id}', [FilmController::class, 'show']);
-    Route::get('/{id}/edit', [FilmController::class, 'edit']);
-    Route::put('/{id}', [FilmController::class, 'update']);
 
     // Edit dengan ajax
     Route::get('/{id}/edit_ajax', [FilmController::class, 'edit_ajax']);
@@ -112,5 +107,4 @@ Route::group(['prefix' => 'film'], function () {
     // Delete dengan ajax
     Route::get('/{id}/delete_ajax', [FilmController::class, 'confirm_ajax']);
     Route::delete('/{id}/delete_ajax', [FilmController::class, 'delete_ajax']);
-    Route::delete('/{id}', [FilmController::class, 'destroy']);
 });

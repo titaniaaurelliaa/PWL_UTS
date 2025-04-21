@@ -80,11 +80,35 @@
                     }
                 },
                 columns: [
-                    {data: "film_id", name: 'film_id'},
-                    {data: "kategori_nama", name: 'kategori_nama'}, 
-                    {data: "film_kode", name: 'film_kode'},
-                    {data: "film_nama", name: 'film_nama'},
-                    {data: "harga_jual", name: 'harga_jual'},
+                    {
+                        data: "DT_RowIndex",
+                        className: "text-center",
+                        orderable: false,
+                        searchable: false
+                    }, {
+                        // mengambil data kategori hasil dari ORM berelasi
+                        data: "kategori.kategori_nama",
+                        className: "",
+                        orderable: false,
+                        searchable: false
+                    },{
+                        data: "film_kode",
+                        className: "",
+                        // orderable : true , jika ingin kolom ini bisa diurutkan
+                        orderable: true,
+                        // searchable : true , jika ingin kolom ini bisa dicari
+                        searchable: true
+                    }, {
+                        data: "film_nama",
+                        className: "",
+                        orderable: true,
+                        searchable: true
+                    }, {
+                        data: "harga_jual",
+                        className: "",
+                        orderable: true,
+                        searchable: true
+                    },
                     {
                         data: "aksi",
                         name: 'aksi',
@@ -92,7 +116,6 @@
                         searchable: false
                     }
                 ],
-                
             });
 
             $('#kategori_id').on('change', function () {
