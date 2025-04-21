@@ -47,7 +47,7 @@
             </table>
         </div>
     </div>
-    <div id="myModal" class="modal fade animate shake" tabindex="-1" role="dialog" data- backdrop="static"
+    <div id="myModal" class="modal fade animate shake" tabindex="-1" role="dialog" data-backdrop="static"
         data-keyboard="false" data-width="75%" aria-hidden="true">
     </div>
 @endsection
@@ -81,6 +81,12 @@
                         orderable: false,
                         searchable: false
                     }, {
+                        // mengambil data level hasil dari ORM berelasi
+                        data: "level.level_nama",
+                        className: "",
+                        orderable: false,
+                        searchable: false
+                    },{
                         data: "username",
                         className: "",
                         // orderable : true , jika ingin kolom ini bisa diurutkan
@@ -92,12 +98,6 @@
                         className: "",
                         orderable: true,
                         searchable: true
-                    }, {
-                        // mengambil data level hasil dari ORM berelasi
-                        data: "level.level_nama",
-                        className: "",
-                        orderable: false,
-                        searchable: false
                     }, {
                         data: "aksi",
                         className: "",
