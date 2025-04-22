@@ -98,7 +98,11 @@ class UserController extends Controller
                 ]);
             }
 
-            UserModel::create($request->all());
+            // Hash password sebelum disimpan
+            $userData = $request->all();
+            $userData['password'] = bcrypt($request->password);
+            
+            UserModel::create($userData);
 
             return response()->json([
                 'status' => true,
