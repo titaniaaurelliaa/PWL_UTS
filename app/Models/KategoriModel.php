@@ -15,7 +15,7 @@ class KategoriModel extends Model
     protected $primaryKey = "kategori_id";
     protected $fillable = ['kategori_kode', 'kategori_nama'];
 
-    public function barang(): HasMany
+    public function film(): HasMany
     {
         return $this->hasMany(FilmModel::class);
     }

@@ -102,18 +102,7 @@ class FilmController extends Controller
     {
         $film = FilmModel::with('kategori')->find($id);
 
-        $breadcrumb = (object) [
-            'title' => 'Detail Film',
-            'list'  => ['Home', 'Film', 'Detail']
-        ];
-
-        $page = (object) [
-            'title' => 'Detail film'
-        ];
-
-        $activeMenu = 'film';
-
-        return view('film.show', ['breadcrumb' => $breadcrumb, 'page' => $page, 'activeMenu' => $activeMenu, 'film' => $film]);
+        return view('film.show', ['film' => $film]);
     }
 
     // Edit ajax

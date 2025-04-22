@@ -57,13 +57,14 @@
 
 @push('js')
     <script>
+        var dataKategori
         function modalAction(url = ''){
             $('#myModal').load(url,function(){
                 $('#myModal').modal('show');
             });
         }
         $(document).ready(function() {
-            var dataKategori = $('#table_kategori').DataTable({
+            dataKategori = $('#table_kategori').DataTable({
                 serverSide: true, // serverSide: true, jika ingin menggunakan server side processing
                 ajax: {
                     "url": "{{ url('kategori/list') }}",

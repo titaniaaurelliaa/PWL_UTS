@@ -33,7 +33,7 @@ Route::group(['prefix' => 'user'], function () {
     Route::get('/create_ajax', [UserController::class, 'create_ajax']); // menampilkan halaman form tambah user ajax
     Route::post('/ajax', [UserController::class, 'store_ajax']); // menyimpan data user baru ajax
     
-    Route::get('/{id}', [UserController::class, 'show']); // menampilkan detail user
+    Route::get('/{id}/show_ajax', [UserController::class, 'show']); // menampilkan detail user
     
     // Edit dengan ajax
     Route::get('/{id}/edit_ajax', [UserController::class, 'edit_ajax']); // menampilkan halaman form edit user ajax
@@ -53,7 +53,7 @@ Route::group(['prefix' => 'level'], function () {
     Route::get('/create_ajax', [LevelController::class, 'create_ajax']); // menampilkan halaman form tambah level ajax
     Route::post('/ajax', [LevelController::class, 'store_ajax']); // menyimpan data level baru ajax
 
-    Route::get('/{id}', [LevelController::class, 'show']); // menampilkan detail level
+    Route::get('/{id}/show_ajax', [LevelController::class, 'show']); // menampilkan detail level
 
     // Edit dengan ajax
     Route::get('/{id}/edit_ajax', [LevelController::class, 'edit_ajax']); // menampilkan halaman form edit level ajax
@@ -73,7 +73,7 @@ Route::group(['prefix' => 'kategori'], function () {
     Route::get('/create_ajax', [KategoriController::class, 'create_ajax']); // menampilkan halaman form tambah kategori ajax
     Route::post('/ajax', [KategoriController::class, 'store_ajax']); // menyimpan data kategori baru ajax
 
-    Route::get('/{id}', [KategoriController::class, 'show']); // menampilkan detail kategori
+    Route::get('/{id}/show_ajax', [KategoriController::class, 'show']); // menampilkan detail kategori
 
     // Edit dengan ajax
     Route::get('/{id}/edit_ajax', [KategoriController::class, 'edit_ajax']); // menampilkan halaman form edit kategori ajax
@@ -93,7 +93,7 @@ Route::group(['prefix' => 'film'], function () {
     Route::get('/create_ajax', [FilmController::class, 'create_ajax']);
     Route::post('/ajax', [FilmController::class, 'store_ajax']);
 
-    Route::get('/{id}', [FilmController::class, 'show']);
+    Route::get('/{id}/show_ajax', [FilmController::class, 'show']);
 
     // Edit dengan ajax
     Route::get('/{id}/edit_ajax', [FilmController::class, 'edit_ajax']);

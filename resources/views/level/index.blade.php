@@ -55,13 +55,14 @@
 
 @push('js')
     <script>
+        var dataLevel;
         function modalAction(url = ''){
             $('#myModal').load(url,function(){
                 $('#myModal').modal('show');
             });
         }
         $(document).ready(function() {
-            var dataLevel = $('#table_level').DataTable({
+            dataLevel = $('#table_level').DataTable({
                 serverSide: true,
                 ajax: {
                     "url": "{{ url('level/list') }}",
