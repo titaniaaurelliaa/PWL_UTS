@@ -21,17 +21,17 @@
                 </div>
                 <div class="form-group">
                     <label>Kode Film</label>
-                    <input value="" type="text" name="film_kode" id="film_kode" class="form-control" required>
+                    <input value="" type="text" name="film_kode" id="film_kode" class="form-control" placeholder="Masukkan Kode Level" required>
                     <small id="error-film_kode" class="error-text form-text text-danger"></small>
                 </div>
                 <div class="form-group">
                     <label>Judul Film</label>
-                    <input value="" type="text" name="film_nama" id="film_nama" class="form-control" required>
+                    <input value="" type="text" name="film_nama" id="film_nama" class="form-control" placeholder="Masukkan Judul Film" required>
                     <small id="error-film_nama" class="error-text form-text text-danger"></small>
                 </div>
                 <div class="form-group">
                     <label>Harga Jual</label>
-                    <input value="" type="number" name="harga_jual" id="harga_jual" class="form-control" required>
+                    <input value="" type="number" name="harga_jual" id="harga_jual" class="form-control" placeholder="Masukkan Harga Film" required>
                     <small id="error-harga_jual" class="error-text form-text text-danger"></small>
                 </div>
             </div>

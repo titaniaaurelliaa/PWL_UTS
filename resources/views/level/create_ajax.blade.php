@@ -10,13 +10,12 @@
             <div class="modal-body">
                 <div class="form-group">
                     <label>Kode Level</label>
-                    <input value="" type="text" name="level_kode" id="level_kode" class="form-control" required>
-
+                    <input value="" type="text" name="level_kode" id="level_kode" class="form-control" placeholder="Masukkan Kode Level" required>
                     <small id="error-level_kode" class="error-text form-text text-danger"></small>
                 </div>
                 <div class="form-group">
                     <label>Level Nama</label>
-                    <input value="" type="text" name="level_nama" id="level_nama" class="form-control" required>
+                    <input value="" type="text" name="level_nama" id="level_nama" class="form-control" placeholder="Masukkan Nama Level" required>
 
                     <small id="error-level_nama" class="error-text form-text text-danger"></small>
                 </div>
