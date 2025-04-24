@@ -17,8 +17,9 @@
         </div>
     </div>
 @else
-    <form action="{{ url('/film/' . $film->film_id . '/konfirmasi_ajax') }}" method="POST" id="form-konfirmasi">
+    <form action="{{ url('/film/' . $film->film_id . '/delete_ajax') }}" method="POST" id="form-konfirmasi">
         @csrf
+        @method('DELETE')
         <div id="modal-master" class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -63,31 +64,33 @@
             $("#form-konfirmasi").validate({
                 rules: {}, // Anda dapat menambahkan aturan validasi jika diperlukan
                 submitHandler: function(form) {
+                    event.preventDefault(); // Mencegah form submit biasa
                     $.ajax({
                         url: form.action,
-                        type: form.method,
+                        type: 'DELETE',
                         data: $(form).serialize(),
                         success: function(response) {
                             if (response.status) {
-                                $('#myModal').modal('hide'); // Pastikan ID modal Anda adalah 'myModal'
+                                $('#myModal').modal(
+                                    'hide'); // Pastikan ID modal Anda adalah 'myModal'
                                 Swal.fire({
                                     icon: 'success',
                                     title: 'Berhasil',
                                     text: response.message
                                 }).then(() => {
-                                     // Lakukan reload pada halaman atau tabel yang sesuai
-                                     if (typeof dataFilm !== 'undefined'){
+                                    // Lakukan reload pada halaman atau tabel yang sesuai
+                                    if (typeof dataFilm !== 'undefined') {
                                         dataFilm.ajax.reload();
-                                      } else{
-                                         window.location.reload();
-                                      }
+                                    } else {
+                                        window.location.reload();
+                                    }
 
                                 });
 
                             } else {
                                 $('.error-text').text(''); //bersihkan pesan error
-                                if(response.msgField){
-                                     $.each(response.msgField, function(prefix, val) {
+                                if (response.msgField) {
+                                    $.each(response.msgField, function(prefix, val) {
                                         $('#error-' + prefix).text(val[0]);
                                     });
                                 }
